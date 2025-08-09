@@ -25,10 +25,7 @@ require("connection.php");
         $category_name = $data["category_name"];
         $category_entrydate = $data["category_entrydate"];
 
-
-
     }
-    ;
 
     if (isset($_GET["category_name"])) {
 
