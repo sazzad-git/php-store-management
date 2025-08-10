@@ -25,15 +25,18 @@ require("connection.php");
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
         } else {
-            echo "Not inserted";
+            echo "Data Not inserted";
         }
-
-
     }
+
     ?>
 
+    <!-- Select from category -->
     <?php
-    $sql = "SELECT * category";
+    $sql = "SELECT * FROM category";
+
+    $query = $conn->query($sql);
+
     ?>
 
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
@@ -42,10 +45,19 @@ require("connection.php");
         Product Category: <br>
 
         <select name="product_category" id="">
-            <option value=""></option>
+            <?php
+            while ($data = mysqli_fetch_assoc($query)) {
+
+                $category_id = $data["category_id"];
+                $category_name = $data["category_name"];
+
+                echo "<option value='$category_id'>$category_name</option>";
+            }
+            ?>
+
         </select>
 
-        <input type="text" name="product_category"><br> <br>
+        <br> <br>
         Product Code: <br>
         <input type="text" name="product_code"><br> <br>
         Product Entry Date: <br>
